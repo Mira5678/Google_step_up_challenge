@@ -74,6 +74,73 @@ def plot_cpr_comparison(df: pd.DataFrame):
     fig.update_traces(textposition="outside")
     return fig
 
+def plot_allocation_comparison(allocation_df: pd.DataFrame):
+    """
+    Grouped bar chart comparing current spend vs recommended spend per
+    Market x Channel combo. Expects columns: Market, Channel,
+    Current_Spend, Recommended_Spend.
+    """
+    df = allocation_df.copy()
+    df["label"] = df["Market"] + " · " + df["Channel"]
+    df = df.sort_values("Recommended_Spend", ascending=True)
+
+    melted = df.melt(
+        id_vars="label",
+        value_vars=["Current_Spend", "Recommended_Spend"],
+        var_name="Type",
+        value_name="Spend",
+    )
+    melted["Type"] = melted["Type"].map(
+        {"Current_Spend": "Current", "Recommended_Spend": "Recommended"}
+    )
+
+    fig = px.bar(
+        melted,
+        x="Spend",
+        y="label",
+        color="Type",
+        orientation="h",
+        barmode="group",
+        labels={"Spend": "Spend ($)", "label": ""},
+        title="Current vs Recommended Spend by Market/Channel",
+        color_discrete_map={"Current": "#B0BEC5", "Recommended": "#0F9D58"},
+    )
+    return fig
+
+
+def plot_lifted_users_comparison(allocation_df: pd.DataFrame):
+    """
+    Grouped bar chart comparing current vs projected lifted users per
+    Market x Channel combo. Expects columns: Market, Channel,
+    Current_Lifted_Users, Projected_Lifted_Users.
+    """
+    df = allocation_df.copy()
+    df["label"] = df["Market"] + " · " + df["Channel"]
+    df = df.sort_values("Projected_Lifted_Users", ascending=True)
+
+    melted = df.melt(
+        id_vars="label",
+        value_vars=["Current_Lifted_Users", "Projected_Lifted_Users"],
+        var_name="Type",
+        value_name="Lifted_Users",
+    )
+    melted["Type"] = melted["Type"].map(
+        {"Current_Lifted_Users": "Current", "Projected_Lifted_Users": "Projected"}
+    )
+
+    fig = px.bar(
+        melted,
+        x="Lifted_Users",
+        y="label",
+        color="Type",
+        orientation="h",
+        barmode="group",
+        labels={"Lifted_Users": "Lifted Users", "label": ""},
+        title="Current vs Projected Lifted Users by Market/Channel",
+        color_discrete_map={"Current": "#B0BEC5", "Recommended": "#4285F4", "Projected": "#4285F4"},
+    )
+    return fig
+
 
 def plot_relative_cost_index(df: pd.DataFrame, top_n: int = 10):
     """

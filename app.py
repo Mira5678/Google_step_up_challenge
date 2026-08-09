@@ -10,6 +10,7 @@ from dashboard_pages.overview import show_overview
 from dashboard_pages.campaigns import show_campaigns
 from dashboard_pages.markets_channels import show_markets_channels
 from dashboard_pages.creative import show_creative
+from dashboard_pages.budget_optimisation import show_budget_optimisation
 from dashboard_pages.recommendations import show_recommendations
 
 
@@ -44,6 +45,7 @@ def main():
             "Campaign Performance",
             "Markets & Channels",
             "Creative Performance",
+            "Budget Optimisation",
             "Recommendations",
         ],
     )
@@ -57,6 +59,8 @@ def main():
         show_markets_channels(market_channel_df)
     elif page == "Creative Performance":
         show_creative(creative_df)
+    elif page == "Budget Optimisation":
+        show_budget_optimisation(market_channel_df)
     elif page == "Recommendations":
         show_recommendations(campaign_df, market_channel_df, creative_df)
 
