@@ -1,4 +1,4 @@
-# Gemini Marketing Intelligence Platform
+# Google STEP UP Career Challenge
 
 An interactive marketing analytics platform for evaluating Gemini Pro campaigns and identifying opportunities to improve campaign efficiency, brand lift, and creative performance.
 
