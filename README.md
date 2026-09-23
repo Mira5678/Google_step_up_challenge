@@ -1,16 +1,21 @@
-# Google STEP UP Career Challenge
+# Google STEP UP Career Challenge - Power Google's Gemini Pro Breakthrough!
 
 An interactive marketing analytics platform for evaluating Gemini Pro campaigns and identifying opportunities to improve campaign efficiency, brand lift, and creative performance.
 
 > **Note:** This is part of the Google Step Up Career Challenge — *Power Google's Gemini Pro Breakthrough!* — with further improvement and expansion of the project through additional data analysis in a Jupyter notebook and an interactive dashboard built with Streamlit.
 
-## What it does
+## Overview
 
-Three source datasets — a historic campaign performance log, a brand lift study, and a creative performance report — are cleaned, merged, and analysed in `insights.ipynb`. The notebook exports three processed CSVs, which the Streamlit app turns into an interactive dashboard for exploring what's working, where, and why, and for planning where budget should go next.
+Gemini Pro's marketing team ran a series of campaigns across multiple markets and channels to build awareness and consideration for the product. Three datasets came out of that work — a historic campaign performance log, a brand lift study, and a creative performance report — but on their own they're just spreadsheets: useful for someone who already knows what question to ask, hard to act on for anyone else.
 
-```
-RAW CSVs  →  JUPYTER NOTEBOOK (analysis)  →  3 PROCESSED CSVs  →  STREAMLIT DASHBOARD
-```
+### Aim of the project: 
+To convert a one-off campaign analysis into a repeatable, data-driven decision-making framework — providing stakeholders with a consistent, accessible view of what is driving Gemini Pro's marketing performance, so that future budget allocation and creative strategy are grounded in evidence rather than intuition.
+
+### What it does:
+The notebook (`insights.ipynb`) cleans and merges the three source datasets, then computes the metrics that actually answer "did this work, and was it worth it" — relative brand lift, statistical significance, cost per lifted user (CPLU), cost per reach (CPR), and creative resonance by market. Those results are exported as processed CSVs and turned into an interactive Streamlit dashboard, so the analysis is something you can click through and filter rather than re-read a notebook to find.
+
+### How it helps: 
+Instead of digging through raw campaign rows, anyone on the team — not just the person who ran the analysis — can open the dashboard and immediately see which campaigns actually moved the needle, which markets and channels deliver lift most cheaply, which creative resonates where, and how a given budget should be split to get the most lifted users out of it. Filters and a budget optimiser turn the analysis into something usable for planning the next campaign, not just reporting on the last one.
 
 ## User journey
 
@@ -27,13 +32,15 @@ RAW CSVs  →  JUPYTER NOTEBOOK (analysis)  →  3 PROCESSED CSVs  →  STREAMLI
 
 ## Data
 
+```
+RAW CSVs  →  JUPYTER NOTEBOOK (analysis)  →  3 PROCESSED CSVs  →  STREAMLIT DASHBOARD
+```
+
 | File | Grain | Key columns |
 |---|---|---|
 | `processed_campaign_analysis.csv` | Campaign × Market × Channel | `Relative_Lift`, `CPLU`, `CPR`, `is_significant`, `lifted_users` |
 | `market_channel_analysis.csv` | Market × Channel | `Spend`, `Reach`, `Lifted_Users`, `CPLU`, `CPR`, `Relative_Cost_Index` |
 | `creative_market_performance.csv` | Market × Creative | `Point_Est_Consideration` |
-
-These live in `data/processed/`. The three raw source CSVs live in `data/raw/` for reference only — the dashboard never reads them directly.
 
 ## Project structure
 
